@@ -107,7 +107,7 @@ public class InvoiceProductServiceImpl implements InvoiceProductService {
                 CompanyDTO company = securityService.getLoggedInUser().getCompany();
                 Company convertedCompany = mapper.convert(company, new Company());
 
-                List<InvoiceProduct> existingInvoiceProducts = repository.findByInvoice_CompanyAndInvoice_InvoiceStatus(convertedCompany, InvoiceStatus.AWAITING_APPROVAL);
+                List<InvoiceProduct> existingInvoiceProducts = repository.findByInvoice_CompanyAndInvoice_InvoiceStatusOrderByInsertDateTime(convertedCompany, InvoiceStatus.AWAITING_APPROVAL);
 
                 Integer totalAddedQuantity = existingInvoiceProducts.stream()
                         .filter(invoiceProduct -> invoiceProduct.getProduct().getId() == productToAdd.getProduct().getId())
@@ -161,7 +161,7 @@ public class InvoiceProductServiceImpl implements InvoiceProductService {
     public List<InvoiceProductDTO> findAllApprovedInvoiceInvoiceProduct(InvoiceStatus invoiceStatus) {
         CompanyDTO companyDto = securityService.getLoggedInUser().getCompany();
         Company company = mapper.convert(companyDto, new Company());
-        return repository.findByInvoice_CompanyAndInvoice_InvoiceStatus(company,invoiceStatus).stream()
+        return repository.findByInvoice_CompanyAndInvoice_InvoiceStatusOrderByInsertDateTime(company,invoiceStatus).stream()
                 .map(invoiceProduct -> mapper.convert(invoiceProduct, new InvoiceProductDTO()))
                 .collect(Collectors.toList());
     }

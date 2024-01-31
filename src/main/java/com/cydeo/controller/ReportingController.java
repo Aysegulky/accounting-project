@@ -33,6 +33,6 @@ public class ReportingController {
 
         model.addAttribute("productProfitLossDataMap",reportingService.getProductProfitLossListMap());
 
-        return "report/product-profit-loss";
+        return "report/product-profit-loss-barchart";
     }
 }

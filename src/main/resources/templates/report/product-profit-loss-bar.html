@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/head :: header">
+</head>
+<body>
+<div class="dashboard-main-wrapper">
+    <div th:replace="fragments/header :: header"></div>
+    <div th:replace="fragments/left-sidebar :: left-sidebar"></div>
+    <div class="dashboard-wrapper">
+        <div class="dashboard-ecommerce">
+            <div class="container-fluid dashboard-content">
+                <div class="ecommerce-widget">
+                    <section class="panel">
+
+                        <div class="col-12 dropdown">
+                            <button class="btn btn-info dropdown-toggle" type="button" id="viewSelector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Select View
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="viewSelector">
+                                <a class="dropdown-item" th:href="@{/reports/productProfitLoss}">Table</a>
+                                <a class="dropdown-item" th:href="@{/reports/profitLossData}">Bar Chart</a>
+                            </div>
+                        </div>
+
+
+                        <header class="panel-heading text-center">
+                            <h3 class="panel-title">Product Profit/Loss Report</h3>
+                        </header>
+                        <div class="panel-body">
+                            <div class="users-list-table">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card pb-5">
+                                            <div class="card-content fw-container">
+                                                <div class="card-body fw-body">
+                                                    <!-- Table Container -->
+
+                                                    <!-- Bar Chart Container -->
+                                                    <div id="barChartContainer" class="simple-bar-chart">
+
+                                                        <!-- ... Bar Chart content ... -->
+
+<!--                                                            <div th:each="item : ${barChartData}"-->
+<!--                                                                 th:style="'&#45;&#45;clr: ' + ${item.clr} + '; &#45;&#45;val: ' + ${item.val}">-->
+<!--                                                                <div class="label" th:text="${item.label}"></div>-->
+<!--                                                                <div class="value" th:text="${item.value}"></div>-->
+<!--                                                            </div>-->
+
+
+                                                        <div class="item" style="--clr: #5EB344; --val: 1458/100">
+                                                            <div class="label">HP Elite 800G1 Desktop Computer Package</div>
+                                                            <div class="value">$1458</div>
+                                                        </div>
+                                                        <div class="item" style="--clr: #FCB72A; --val: 650/100">
+                                                            <div class="label">2021 Apple MacBook Pro</div>
+                                                            <div class="value">$650</div>
+                                                        </div>
+                                                        <div class="item" style="--clr: #F8821A; --val: 4560/100">
+                                                            <div class="label">Apple iPhone-13</div>
+                                                            <div class="value">$4560</div>
+                                                        </div>
+                                                        <div class="item" style="--clr: #E0393E; --val: 120/100">
+                                                            <div class="label">SAMSUNG Galaxy S22</div>
+                                                            <div class="value">$120</div>
+                                                        </div>
+                                                        <div class="item" style="--clr: #963D97; --val: 1110/100">
+                                                            <div class="label">Samsung Galaxy S20</div>
+                                                            <div class="value">$1110</div>
+                                                        </div>
+                                                        <div class="item" style="--clr: #069CDB; --val: 658/100">
+                                                            <div class="label">Moto G Power</div>
+                                                            <div class="value">$658</div>
+                                                        </div>
+                                                        <div class="item" style="--clr: #ADAA40; --val: 5600/100">
+                                                            <div class="label">Apple iPhone-11</div>
+                                                            <div class="value">$5600</div>
+                                                        </div>
+                                                        <div class="item" style="--clr: #C96D4C; --val:3540/100">
+                                                            <div class="label">Apple iPhone-14</div>
+                                                            <div class="value">$3540</div>
+                                                        </div>
+                                                        <div class="item" style="--clr:#978dad; --val: 1100/100">
+                                                            <div class="label">Apple iPhone-12</div>
+                                                            <div class="value">$1100</div>
+                                                        </div>
+                                                        <div class="item" style="--clr: #ae5231; --val: 4495/100">
+                                                            <div class="label">2019 Apple MacBook Pro</div>
+                                                            <div class="value">$4495</div>
+                                                        </div>
+                                                        <div class="item" style="--clr: #ffa2a1; --val: 590/100">
+                                                            <div class="label">2020 Apple MacBook Pro</div>
+                                                            <div class="value">$590</div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/javascript :: js"></div>
+</body>
+
+</html>
