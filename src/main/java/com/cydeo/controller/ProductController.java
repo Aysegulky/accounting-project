@@ -21,7 +21,6 @@ public class ProductController {
 
     private final ProductService productService;
     private final CategoryService categoryService;
-    private final ProductRepository productRepository;
 
 
     //End-user should be able to List (display) all products in the product_list page...
