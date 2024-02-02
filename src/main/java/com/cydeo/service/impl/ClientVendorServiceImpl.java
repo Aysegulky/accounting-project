@@ -47,22 +47,26 @@ public class ClientVendorServiceImpl implements ClientVendorService {
         this.countryClient = countryClient;
     }
 
+
     @Override
     public ClientVendorDTO findById(Long id) {
         ClientVendor clientVendor = clientVendorRepository.findById(id).orElseThrow(()->
                 new ClientVendorNotFoundException("Client vendor cannot be found with id: "+id));
+
         return mapperUtil.convert(clientVendor,new ClientVendorDTO());
     }
+
 
     @Override
     public List<ClientVendorDTO> getAllClientVendors() {
         UserDTO loggedInUser = securityService.getLoggedInUser();
         List<ClientVendor> clientVendors = clientVendorRepository.findAllByCompanyId(loggedInUser.getCompany().getId());
+
         return clientVendors.stream().map(clientVendor -> {
-                            boolean hasInvoice = isClientHasInvoice(clientVendor.getId());
-                            ClientVendorDTO convert = mapperUtil.convert(clientVendor, new ClientVendorDTO());
-                           convert.setHasInvoice(hasInvoice);
-                                return convert;
+            boolean hasInvoice = isClientHasInvoice(clientVendor.getId());
+            ClientVendorDTO convert = mapperUtil.convert(clientVendor, new ClientVendorDTO());
+            convert.setHasInvoice(hasInvoice);
+            return convert;
                         })
                 .collect(Collectors.toList());
     }
@@ -97,16 +101,19 @@ public class ClientVendorServiceImpl implements ClientVendorService {
     @Override
     public void delete(Long id) {
 
-       Optional<ClientVendor> clientVendorToBeDeleted = clientVendorRepository.findById(id);
-        if (clientVendorToBeDeleted.isPresent()){
+        Optional<ClientVendor> clientVendorToBeDeleted = clientVendorRepository.findById(id);
+
+        clientVendorToBeDeleted.ifPresent(clientVendor -> {
             if (!invoiceService.existsByClientVendorId(id)) {
-                clientVendorToBeDeleted.get().setIsDeleted(true);
-                clientVendorRepository.save(clientVendorToBeDeleted.get());
-            }else {
-                ClientVendorDTO clientVendorDTO =mapperUtil.convert(clientVendorToBeDeleted, new ClientVendorDTO());
-                clientVendorDTO.setHasInvoice(true);
+                clientVendor.setIsDeleted(true);
+                clientVendorRepository.save(clientVendor);
+            } else {
+                ClientVendorDTO clientVendorDTO = mapperUtil.convert(clientVendor, new ClientVendorDTO());
+                if (clientVendorDTO != null) {
+                    clientVendorDTO.setHasInvoice(true);
+                }
             }
-        }
+        });
 
     }
 
@@ -121,7 +128,7 @@ public class ClientVendorServiceImpl implements ClientVendorService {
                 .collect(Collectors.toList());
     }
 
-    @Override
+     @Override
     public BindingResult addTypeValidation(String type, BindingResult bindingResult) {
         if (clientVendorRepository.existsByClientVendorName(type)) {
             bindingResult.addError(new FieldError("newType", "type", "This type already exists."));
@@ -147,6 +154,7 @@ public class ClientVendorServiceImpl implements ClientVendorService {
         return List.of();
 
     }
+
 
 }
 
