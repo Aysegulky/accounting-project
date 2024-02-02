@@ -12,4 +12,9 @@ public interface ReportingService {
     List<Map.Entry<String ,BigDecimal>> getMonthlyProfitLossListMap();
 
     List<Map.Entry<String ,BigDecimal>> getProductProfitLossListMap();
+
+    List<String> generatePageOptions(int dataSize);
+
+    <T> List<T> getSublistByPage(List<T> originalList, int pageNumber, int pageSize);
+    int getScaleNum();
 }

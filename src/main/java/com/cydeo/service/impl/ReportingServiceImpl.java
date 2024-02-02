@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -90,6 +91,40 @@ public class ReportingServiceImpl implements ReportingService {
         return mapKeys;
     }
 
+    public List<String> generatePageOptions(int dataSize) {
+        List<String> pageOptions = new ArrayList<>();
+        int pageNum = dataSize / 10;
+        int overPageNum = dataSize % 10;
+        if (overPageNum != 0) {
+            for (int i = 1; i <= pageNum + 1; i++) {
+                pageOptions.add("Page " + i);
+            }
+        } else {
+            for (int i = 1; i <= pageNum; i++) {
+                pageOptions.add("Page " + i);
+            }
 
+        }
+        return pageOptions;
+    }
+    public  <T> List<T> getSublistByPage(List<T> originalList, int pageNumber, int pageSize) {
+        int size = originalList.size();
 
+        // Calculate start and end indices based on page number and size
+        int startIndex = (pageNumber - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, size);
+
+        // Return the sublist
+        return originalList.subList(startIndex, endIndex);
+    }
+
+    @Override
+    public int getScaleNum() {
+        List<Map.Entry<String, BigDecimal>> profitLoss = getProductProfitLossListMap();
+        BigDecimal maxProfit = profitLoss.stream()
+                .map(Map.Entry::getValue).max(BigDecimal::compareTo).get();
+        int scaleNum = maxProfit.divide(BigDecimal.valueOf(100),RoundingMode.HALF_UP).intValue();
+        scaleNum += 2;
+        return scaleNum;
+    }
 }

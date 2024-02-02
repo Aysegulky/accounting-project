@@ -1,7 +1,7 @@
 .simple-bar-chart{
-  --line-count: 10;
+  --line-count: 20;
   --line-color: currentcolor;
-  --line-opacity: 0.25;
+  --line-opacity: 0.15;
   --item-gap: 2%;
   --item-default-color: #060606;
 
@@ -29,11 +29,32 @@
   opacity: var(--line-opacity);
 }
 .simple-bar-chart > .item{
+  --color: var(--color-default);
   height: calc(1% * var(--val));
-  background-color: var(--clr, var(--item-default-color));
+  background-color: var(--color);
   position: relative;
-  animation: item-height 1s ease forwards
+  animation: item-height 1s ease forwards;
 }
+
+:root {
+  --color-1: #5EB344;
+  --color-2: #FCB72A;
+  --color-3: #F8821A;
+  --color-4: #FF5733;
+  --color-5: #E0393E;
+  --color-6: #5733FF;
+  --color-7: #963D97;
+  --color-8: #33FF57;
+  --color-9: #069CDB;
+  --color-10: #ADAA40;
+  --color-11: #C96D4C;
+  --color-12: #978dad;
+  --color-13: #ae5231;
+  --color-14: #ffa2a1;
+  --color-default: #808080; /* Default color for additional items */
+}
+
+
 @keyframes item-height { from { height: 0 } }
 
 .simple-bar-chart > .item > * { position: absolute; text-align: center }
