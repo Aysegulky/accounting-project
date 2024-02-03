@@ -22,7 +22,7 @@ insert into companies(insert_date_time, insert_user_id, is_deleted, last_update_
                       title, phone, website, address_id, company_status)
 values ('2023-04-15 00:00:00', 1, false, '2023-04-15 00:00:00', 1,
         'CYDEO', '+1 (652) 852-8888', 'https://www.cydeo.com', 1, 'ACTIVE'),
-       ('2023-04-15 00:00:00', 1, false, '2023-04-15 00:00:00', 1,
+       ('2020-04-15 00:00:00', 1, false, '2023-04-15 00:00:00', 1,
         'Green Tech', '+1 (652) 852-3246', 'https://www.greentech.com', 2, 'ACTIVE'),
        ('2023-04-15 00:00:00', 1, false, '2023-04-15 00:00:00', 1,
         'Blue Tech', '+1 (215) 654-5268', 'https://www.bluetech.com', 3, 'ACTIVE'),

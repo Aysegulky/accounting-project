@@ -51,16 +51,14 @@ public class ReportingController {
     }
 
     @GetMapping("/profitLossData/pie")
-    public String getProfitLossListPie(Model model, @RequestParam( required = false,defaultValue = "1") int p){
+    public String getProfitLossListPie(Model model, @RequestParam( required = false) Integer year){
 
-        model.addAttribute("monthlyProfitLossDataMap",reportingService.getMonthlyProfitLossListMap());
+        if (year == null) year = currentYear;
 
-        List<Map.Entry<String, BigDecimal>> pieChartData = reportingService.getProductProfitLossListMap();
+        List<Map.Entry<String, BigDecimal>> pieChartData = reportingService.getMonthlyProfitLossByYear(year);
         List<String> pageOptions = reportingService.generatePageOptionsForProfitLoss();
 
-        pieChartData = reportingService.getSublistByPage(pieChartData,p,10);
-
-        model.addAttribute("barChartData",pieChartData);
+        model.addAttribute("pieChartData",pieChartData);
         model.addAttribute("pageViewOptions",pageOptions);
 
         return "report/profit-loss-report-pie";

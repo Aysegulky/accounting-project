@@ -54,7 +54,6 @@ public class ReportingServiceImpl implements ReportingService {
 
         LocalDateTime companyStartYear = currentCompany.getInsertDateTime();
         List<LocalDate> keys = mapKeyGenerator(companyStartYear,year);
-        System.out.println(keys);
         return getMonthlyProfitLossListMapByKeys(keys,companyId);
     }
 
