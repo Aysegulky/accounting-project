@@ -10,6 +10,8 @@ public interface ReportingService {
     List<InvoiceProductDTO> getInvoiceProductList();
 
     List<Map.Entry<String ,BigDecimal>> getMonthlyProfitLossListMap();
+    List<Map.Entry<String ,BigDecimal>> getMonthlyProfitLossByYear(Integer year);
+
 
     List<Map.Entry<String ,BigDecimal>> getProductProfitLossListMap();
 
@@ -17,4 +19,7 @@ public interface ReportingService {
 
     <T> List<T> getSublistByPage(List<T> originalList, int pageNumber, int pageSize);
     int getScaleNum();
+    int getScaleNum(List<Map.Entry<String, BigDecimal>> data);
+
+    List<String> generatePageOptionsForProfitLoss();
 }
