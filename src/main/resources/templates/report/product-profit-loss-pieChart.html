@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/head :: header"></head>
+<body>
+<div class="dashboard-main-wrapper">
+  <div th:replace="fragments/header :: header"></div>
+  <div th:replace="fragments/left-sidebar :: left-sidebar"></div>
+  <div class="dashboard-wrapper">
+    <div class="dashboard-ecommerce">
+      <div class="container-fluid dashboard-content pt-0">
+        <div class="ecommerce-widget">
+          <section class="panel">
+
+            <div class="row">
+              <div class="col-6">
+                <div class="col-12 dropdown">
+                  <button class="btn btn-info dropdown-toggle" type="button" id="viewSelector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select View
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="viewSelector">
+                    <a class="dropdown-item" th:href="@{/reports/productProfitLoss/table}">Table</a>
+                    <a class="dropdown-item" th:href="@{/reports/productProfitLoss/bar}">Bar Chart</a>
+                    <a class="dropdown-item" th:href="@{/reports/productProfitLoss/pie}">Pie Chart</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6" th:align="right">
+                <div class="col-12 dropdown">
+                  <button class="btn btn-info dropdown-toggle" type="button" id="pageSelector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Page
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="pageSelector">
+                    <a th:each="option, pageNum : ${pageViewOptions}" th:href="@{'/reports/productProfitLoss/pie/?p=' + ${pageNum.index + 1}}" class="dropdown-item" th:text="${option}"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <header class="panel-heading text-center">
+              <h3 class="panel-title">Product Profit/Loss Report</h3>
+            </header>
+            <div class="panel-body">
+              <div class="users-list-table">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-content fw-container">
+                        <div class="card-body fw-body">
+
+                          <section th:align="center">
+                            <div class="pieID pie"></div>
+
+                            <ul class="pieID legend">
+                              <li th:each="entry: ${barChartData}"
+                                  data-toggle="tooltip"
+                                  data-placement="top"
+                                  th:title="${entry.value + '$'}">
+                                <em th:text="${entry.key}"></em>
+                                <span th:text="${entry.value}"></span>
+                              </li>
+                            </ul>
+                          </section>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/javascript :: js"></div>
+</body>
+</html>

@@ -313,21 +313,6 @@ public class InvoiceServiceImpl implements InvoiceService {
         return totalPrice.add(totalPrice.multiply(taxRateMod));
     }
 
-    private void decreaseProductQuantityInStock(List<InvoiceProductDTO> invoiceProductList) {
-        invoiceProductList.forEach(invoiceProductDTO -> {
-            ProductDTO product = invoiceProductDTO.getProduct();
-            Integer quantity = invoiceProductDTO.getQuantity();
-            productService.decreaseProductQuantityInStock(product.getId(), quantity);
-        });
-    }
-    private void increaseProductQuantityInStock(List<InvoiceProductDTO> invoiceProductList) {
-        invoiceProductList.forEach(invoiceProductDTO -> {
-            ProductDTO product = invoiceProductDTO.getProduct();
-            Integer quantity = invoiceProductDTO.getQuantity();
-            productService.increaseProductQuantityInStock(product.getId(), quantity);
-        });
-    }
-
     /**
      * Creates a invoice without saving it to database. InvoiceNo and Invoice date will be auto generated.
      *

@@ -1,0 +1,66 @@
+.simple-bar-chart{
+  --line-count: 20;
+  --line-color: currentcolor;
+  --line-opacity: 0.15;
+  --item-gap: 2%;
+  --item-default-color: #060606;
+
+  height: 30rem;
+  display: grid;
+  grid-auto-flow: column;
+  gap: var(--item-gap);
+  align-items: end;
+  padding-inline: var(--item-gap);
+  --padding-block: 1.5rem; /*space for labels*/
+  padding-block: var(--padding-block);
+  position: relative;
+  isolation: isolate;
+}
+
+.simple-bar-chart::after{
+  content: "";
+  position: absolute;
+  inset: var(--padding-block) 0;
+  z-index: -1;
+  --line-width: 1px;
+  --line-spacing: calc(100% / var(--line-count));
+  background-image: repeating-linear-gradient(to top, transparent 0 calc(var(--line-spacing) - var(--line-width)), var(--line-color) 0 var(--line-spacing));
+  box-shadow: 0 var(--line-width) 0 var(--line-color);
+  opacity: var(--line-opacity);
+}
+.simple-bar-chart > .item{
+  --color: var(--color-default);
+  height: calc(1% * var(--val));
+  background-color: var(--color);
+  position: relative;
+  animation: item-height 1s ease forwards;
+}
+
+:root {
+  --color-1: #5EB344;
+  --color-2: #FCB72A;
+  --color-3: #F8821A;
+  --color-4: #FF5733;
+  --color-5: #E0393E;
+  --color-6: #5733FF;
+  --color-7: #963D97;
+  --color-8: #33FF57;
+  --color-9: #069CDB;
+  --color-10: #ADAA40;
+  --color-11: #C96D4C;
+  --color-12: #978dad;
+  --color-13: #ae5231;
+  --color-14: #ffa2a1;
+  --color-default: #808080; /* Default color for additional items */
+}
+
+
+@keyframes item-height { from { height: 0 } }
+
+.simple-bar-chart > .item > * { position: absolute; text-align: center }
+.simple-bar-chart > .item > .label { inset: 100% 0 auto 0 }
+.simple-bar-chart > .item > .value { inset: auto 0 100% 0 }
+
+.label{
+  color: black;
+}

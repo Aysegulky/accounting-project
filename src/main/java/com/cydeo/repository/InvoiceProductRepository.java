@@ -21,7 +21,7 @@ public interface InvoiceProductRepository extends JpaRepository<InvoiceProduct,L
 
     List<InvoiceProduct> findAllByInvoice_InvoiceStatus(InvoiceStatus invoiceStatus);
 
-    List<InvoiceProduct> findByInvoice_CompanyAndInvoice_InvoiceStatus(Company company, InvoiceStatus invoiceStatus);
+    List<InvoiceProduct> findByInvoice_CompanyAndInvoice_InvoiceStatusOrderByInsertDateTime(Company company, InvoiceStatus invoiceStatus);
     List<InvoiceProduct> findByInvoice_Company_TitleAndProduct_NameAndInvoice_InvoiceTypeAndRemainingQuantityGreaterThanOrderByInsertDateTimeAsc(
             String companyName, String productName, InvoiceType invoiceType, int quantity);
 

@@ -10,7 +10,23 @@
             <div class="container-fluid dashboard-content">
                 <div class="ecommerce-widget">
                     <section class="panel">
-                        <header class="panel-heading text-center"><h3 class="panel-title">Profit/Loss Report</h3></header>
+
+                        <div class="col-12">
+                            <div class="col-12 dropdown">
+                                <button class="btn btn-info dropdown-toggle" type="button" id="viewSelector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Select View
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="viewSelector">
+                                    <a class="dropdown-item" th:href="@{/reports/profitLossData/table}">Table</a>
+                                    <a class="dropdown-item" th:href="@{/reports/profitLossData/bar}">Bar Chart</a>
+                                    <a class="dropdown-item" th:href="@{/reports/profitLossData/pie}">Pie Chart</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <header class="panel-heading text-center">
+                            <h3 class="panel-title">Profit/Loss Report</h3>
+                        </header>
                         <div class="panel-body">
                             <div class="users-list-table">
                                 <div class="row">
